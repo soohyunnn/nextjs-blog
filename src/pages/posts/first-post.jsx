@@ -1,8 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
+import router, { useRouter } from "next/router";
+import { useEffect } from "react";
 import Layout from "../../components/layout";
 
 export default function FirstPost() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/posts/first-post/?counter=10", undefined, { shallow: true });
+  }, []);
+
+  useEffect(() => {
+    alert(router.query.counter); //맨 처음에는 undefined 가 뜨고 그 뒤로 10이 뜬다(counter=10).
+  }, [router.query.counter]);
+
   return (
     <>
       <Layout>
